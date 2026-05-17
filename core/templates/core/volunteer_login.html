@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card shadow p-4">
+
+                <h2 class="text-center mb-3">
+                    Volunteer Login
+                </h2>
+
+                <p class="text-muted text-center mb-4">
+
+                    Login to access your volunteer dashboard.
+
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <div class="text-center">
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+
+                            Login
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,210 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow p-5">
+
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold">
+
+                Welcome, {{ request.user.username }}
+
+            </h1>
+
+            <p class="text-muted">
+
+                Thank you for contributing to the community.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+
+                <div class="card shadow-sm p-4 h-100">
+
+                    <h3 class="fw-bold mb-4">
+
+                        Volunteer Profile
+
+                    </h3>
+
+                    <p>
+
+                        <strong>Email:</strong>
+
+                        {{ request.user.email }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Phone:</strong>
+
+                        {{ profile.phone }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Skills:</strong>
+
+                        {{ profile.skills }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Joined:</strong>
+
+                        {{ profile.joined_at }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card shadow-sm p-4 h-100">
+
+                    <h3 class="fw-bold mb-4">
+
+                        Quick Actions
+
+                    </h3>
+
+                    <a href="{% url 'opportunities' %}"
+                       class="btn btn-primary mb-3">
+
+                        Explore Opportunities
+
+                    </a>
+
+                    <button class="btn btn-outline-primary mb-3">
+
+                        Update Profile
+
+                    </button>
+
+                    <button class="btn btn-outline-secondary">
+
+                        View Activities
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm p-4 mt-5">
+
+    <h3 class="fw-bold mb-4">
+
+        My Opportunity Applications
+
+    </h3>
+
+    {% if applications %}
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Opportunity</th>
+
+                        <th>Status</th>
+
+                        <th>Applied On</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for application in applications %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ application.opportunity.title }}
+
+                            </td>
+
+                            <td>
+
+                                {% if application.status == 'Accepted' %}
+
+                                    <span class="badge bg-success">
+
+                                        Accepted
+
+                                    </span>
+
+                                {% elif application.status == 'Rejected' %}
+
+                                    <span class="badge bg-danger">
+
+                                        Rejected
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        Applied
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {{ application.applied_at }}
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <p class="text-muted">
+
+            You have not applied to any opportunities yet.
+
+        </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

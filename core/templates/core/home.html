@@ -1,0 +1,119 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="hero-section text-center d-flex align-items-center">
+
+    <div class="container">
+
+        <h1 class="display-2 fw-bold text-white">
+            Welcome to CareConnect
+        </h1>
+
+        <p class="lead mt-4 text-light">
+            Connecting NGOs, volunteers, and communities together for a better future.
+        </p>
+
+        <a href="{% url 'volunteer_register' %}"
+            class="btn btn-primary btn-lg">
+
+            Apply as Volunteer
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Opportunities Section -->
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Volunteer Opportunities
+        </h2>
+
+        <p class="text-muted">
+            Explore opportunities added by NGOs and organizations.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        {% for opportunity in opportunities %}
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h4 class="card-title fw-bold">
+                        {{ opportunity.title }}
+                    </h4>
+
+                    <p class="text-primary fw-semibold">
+                        {{ opportunity.ngo_name }}
+                    </p>
+
+                    <p>
+                        📍 {{ opportunity.location }}
+                    </p>
+
+                    <p class="text-muted">
+                        {{ opportunity.description }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="text-center">
+
+            <p>No opportunities available right now.</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- Statistics Section -->
+<div class="container mt-5 mb-5">
+
+    <div class="row text-center">
+
+        <div class="col-md-3">
+            <h1 class="fw-bold text-primary">500+</h1>
+            <p>Active Volunteers</p>
+        </div>
+
+        <div class="col-md-3">
+            <h1 class="fw-bold text-success">120+</h1>
+            <p>NGOs Connected</p>
+        </div>
+
+        <div class="col-md-3">
+            <h1 class="fw-bold text-danger">₹2M+</h1>
+            <p>Donations Managed</p>
+        </div>
+
+        <div class="col-md-3">
+            <h1 class="fw-bold text-warning">50K+</h1>
+            <p>Communities Helped</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

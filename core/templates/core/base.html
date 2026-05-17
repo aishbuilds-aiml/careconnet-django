@@ -1,0 +1,140 @@
+{% load static %} <!-- This tells Django: Enable static files system. Without this: Django cannot access CSS/images properly.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareConnect</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!--{% static 'css/style.css' %} means: Find style.css inside static folder. -->
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="#">
+                CareConnect
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                        href="{% url 'home' %}">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                        href="{% url 'opportunities' %}">
+
+                            Opportunities
+
+                        </a>
+
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                            href="{% url 'volunteer_dashboard' %}">
+
+                                Dashboard
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                            href="{% url 'volunteer_logout' %}">
+
+                                Logout
+
+                            </a>
+
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                            href="{% url 'volunteer_register' %}">
+
+                                Apply
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                            href="{% url 'volunteer_login' %}">
+
+                                Login
+
+                            </a>
+
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+
+        {% if messages %}  <!--Checks: “Are there any messages?”-->
+
+            {% for message in messages %}  <!--Loops through all messages.-->
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert"> <!--creates: green success notification box.-->
+
+                    {{ message }}
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    <!-- Main Content -->
+    {% block content %}
+        <!-- This is:Django Template Language (DTL) :-It creates a placeholder where other pages insert content. -->
+    {% endblock %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
