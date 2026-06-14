@@ -78,27 +78,26 @@
 
                     {% else %}
 
-                        <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'volunteer_register' %}">
+                            Apply
+                        </a>
+                    </li>
 
-                            <a class="nav-link"
-                            href="{% url 'volunteer_register' %}">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'ngo_register' %}">
+                            Register NGO
+                        </a>
+                    </li>
 
-                                Apply
-
-                            </a>
-
-                        </li>
-
-                        <li class="nav-item">
-
-                            <a class="nav-link"
-                            href="{% url 'volunteer_login' %}">
-
-                                Login
-
-                            </a>
-
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'volunteer_login' %}">
+                            Login
+                        </a>
+                    </li>
 
                     {% endif %}
 
